@@ -3,6 +3,8 @@ import { createServer as createViteServer } from "vite";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
+import crypto from "crypto";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,6 +12,8 @@ const __dirname = path.dirname(__filename);
 const VISAS_FILE = path.join(process.cwd(), "visas.json");
 
 async function startServer() {
+  dotenv.config();
+
   const app = express();
   const PORT = 3000;
 
@@ -39,11 +43,20 @@ async function startServer() {
     }
   });
 
+  const ADMIN_USERNAME = process.env.ADMIN_USERNAME ?? "admin";
+  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? "admin123";
+
+  const safeCompare = (a: string, b: string) => {
+    const aBuf = Buffer.from(a);
+    const bBuf = Buffer.from(b);
+    if (aBuf.length !== bBuf.length) return false;
+    return crypto.timingSafeEqual(aBuf, bBuf);
+  };
+
   app.post("/api/login", (req, res) => {
     const { username, password } = req.body;
-    // Simple hardcoded admin credentials for demo
-    // In a real app, use environment variables and bcrypt
-    if (username === "admin" && password === "admin123") {
+
+    if (safeCompare(username, ADMIN_USERNAME) && safeCompare(password, ADMIN_PASSWORD)) {
       res.json({ success: true, token: "mock-admin-token" });
     } else {
       res.status(401).json({ success: false, message: "Invalid credentials" });
