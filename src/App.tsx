@@ -30,18 +30,11 @@ const Logo = () => (
       <img 
         src="/logo.png" 
         alt="Visas Colombia Logo" 
-        className="w-12 h-12 object-contain transition-transform group-hover:scale-105"
+        className="w-44 h-44 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain transition-transform group-hover:scale-105"
         referrerPolicy="no-referrer"
       />
     </div>
-    <div className="flex flex-col leading-[0.85] font-serif-logo">
-      <span className="text-3xl font-bold text-brand-navy tracking-tight">
-        VISAS.
-      </span>
-      <span className="text-2xl font-normal text-brand-grey tracking-[0.15em] uppercase">
-        COLOMBIA
-      </span>
-    </div>
+    <span className="sr-only">Visas Colombia</span>
   </Link>
 );
 
@@ -274,9 +267,14 @@ const VisaDetailPage = ({ visas }: { visas: Visa[] }) => {
                   </li>
                 ))}
               </ul>
-              <button className="w-full mt-8 bg-white text-brand-navy py-4 rounded-full font-bold hover:bg-brand-accent hover:text-white transition-all">
+              <a
+                href="https://wa.me/573133874608?text=Hola%2C%20quiero%20iniciar%20asesor%C3%ADa%20para%20el%20programa%20de%20visa."
+                target="_blank"
+                rel="noreferrer noopener"
+                className="w-full inline-flex justify-center items-center mt-8 bg-white text-brand-navy py-4 rounded-full font-bold hover:bg-brand-accent hover:text-white transition-all"
+              >
                 Iniciar Asesoría
-              </button>
+              </a>
             </div>
 
             <div className="bg-slate-100 p-8 rounded-[32px]">
