@@ -28,7 +28,7 @@ const Logo = () => (
   <Link to="/" className="flex items-center gap-3 group">
     <div className="relative flex items-center justify-center">
       <img 
-        src="https://picsum.photos/seed/visaslogo/100/100" 
+        src="/logo.png" 
         alt="Visas Colombia Logo" 
         className="w-12 h-12 object-contain transition-transform group-hover:scale-105"
         referrerPolicy="no-referrer"
